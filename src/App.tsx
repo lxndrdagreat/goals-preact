@@ -1,40 +1,75 @@
-import { h } from 'preact';
-import { useState, useEffect } from 'preact/hooks';
-import logo from './logo.png';
+import { Component, ComponentChild, h } from 'preact';
+import logo from './logo.svg';
 import './App.css';
+import GoalList from './GoalList';
+import GoalContext, { GoalAppState } from './GoalContext';
+import { GoalsIndexedDBService } from 'goals-storage-indexeddb';
+import type { GoalUpsertData } from 'goals-core';
+import { GoalOccurrence } from 'goals-core';
+import AddGoal from './AddGoal';
 
-function App() {
-  // Create the count state.
-  const [count, setCount] = useState(0);
-  // Create the counter (+1 every second).
-  useEffect(() => {
-    const timer = setTimeout(() => setCount(count + 1), 1000);
-    return () => clearTimeout(timer);
-  }, [count, setCount]);
-  // Return the App component.
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.jsx</code> and save to reload.
-        </p>
-        <p>
-          Page has been open for <code>{count}</code> seconds.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://preactjs.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Preact
-          </a>
-        </p>
-      </header>
-    </div>
-  );
+const db = new GoalsIndexedDBService();
+
+class App extends Component {
+  state: GoalAppState;
+
+  constructor() {
+    super();
+    this.state = {
+      goals: {
+        daily: [],
+        weekly: [],
+      },
+    };
+  }
+
+  componentDidMount() {
+    // initial load of the data
+    this.refreshList();
+  }
+
+  async refreshList() {
+    const completes = await db.getGoalsWithCompleted();
+    this.setState({
+      ...this.state,
+      goals: {
+        daily: completes.filter(
+          (goal) => goal[0].occurs === GoalOccurrence.Daily,
+        ),
+        weekly: completes.filter(
+          (goal) => goal[0].occurs === GoalOccurrence.Weekly,
+        ),
+      },
+    });
+  }
+
+  onAddGoal(goal: GoalUpsertData): void {
+    db.upsertGoal(goal).then(() => {
+      this.refreshList();
+    });
+  }
+
+  onGoalTap(goalId: number): void {
+    (async () => {
+      await db.toggleGoalCompletion(goalId);
+      await this.refreshList();
+    })();
+  }
+
+  render(): ComponentChild {
+    return (
+      <div class="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+        </header>
+        <AddGoal onAdd={this.onAddGoal.bind(this)} />
+        <GoalContext.Provider value={this.state}>
+          <GoalList listType="daily" onItemTap={this.onGoalTap.bind(this)} />
+          <GoalList listType="weekly" onItemTap={this.onGoalTap.bind(this)} />
+        </GoalContext.Provider>
+      </div>
+    );
+  }
 }
 
 export default App;

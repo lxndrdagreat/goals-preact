@@ -22,6 +22,10 @@ See the section about running tests for more information.
 Builds the app for production to the `build/` folder.
 It correctly bundles Preact in production mode and optimizes the build for the best performance.
 
-### Q: What about Eject?
+### npm run format
 
-No eject needed! Snowpack guarantees zero lock-in, and CSA strives for the same.
+Uses Prettier to format code style.
+
+### npm run lint
+
+Uses Prettier to lint for style issues.

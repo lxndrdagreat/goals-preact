@@ -1,0 +1,42 @@
+.GoalItem {
+    display: block;
+}
+
+.GoalItem button {
+    background: transparent;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    width: 100%;
+    color: #FFFFFF;
+    font-size: 18px;
+}
+
+.GoalItem button img {
+    height: 24px;
+    opacity: 0.25;
+    transition: transform .2s ease-in-out;
+}
+
+.GoalItem.occurred button {
+    text-decoration: line-through;
+}
+
+.GoalItem.occurred button img {
+    opacity: 1;
+    transform: rotate(-45deg);
+}
+
+.GoalItem:hover {
+    animation: Item-Pulse infinite 1s ease-in-out alternate;
+}
+
+@keyframes Item-Pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.03);
+    }
+}

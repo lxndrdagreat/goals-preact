@@ -1,0 +1,43 @@
+.AddGoal {
+    width: 100%;
+}
+
+.radio-tab-group {
+    display: flex;
+    margin: 8px 0;
+}
+
+.radio-tab {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.radio-tab label {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+}
+
+.radio-tab input[type=radio]:checked + label {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #000000;
+}
+
+.radio-tab input[type=radio] {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+}
+
+input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 16px;
+}

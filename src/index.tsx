@@ -1,9 +1,9 @@
 import { h, render } from 'preact';
 import 'preact/devtools';
-import App from './App.js';
+import App from './App';
 import './index.css';
 
-const root = document.getElementById('root')
+const root = document.getElementById('root');
 
 if (root) {
   render(<App />, root);

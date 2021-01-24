@@ -1,0 +1,8 @@
+.GoalList {
+    width: 100%;
+}
+
+.GoalList ul {
+    list-style: none;
+    padding: 0;
+}
