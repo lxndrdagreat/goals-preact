@@ -4,9 +4,9 @@ import { expect } from 'chai';
 import App from './App';
 
 describe('<App>', () => {
-  it('renders learn react link', () => {
-    const { getByText } = render(<App />);
-    const linkElement = getByText(/learn preact/i);
+  it('contains the header logo', () => {
+    const { getByAltText } = render(<App />);
+    const linkElement = getByAltText(/logo/i);
     expect(document.body.contains(linkElement));
   });
 });

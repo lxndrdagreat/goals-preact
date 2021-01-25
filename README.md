@@ -1,6 +1,7 @@
-# New Project
+# Goals Preact Client
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+This is a Preact-based SPA for the [Goals project](https://github.com/lxndrdagreat/goals-core).
+It uses [IndexedDB for storage](https://github.com/lxndrdagreat/goals-storage-indexeddb). 
 
 ## Available Scripts
 
