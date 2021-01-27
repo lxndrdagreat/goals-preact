@@ -1,0 +1,41 @@
+.InfoPage {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    background-color: #282c34;
+    overflow-y: scroll;
+    animation: Info-Page-Open .35s ease-in-out;
+    text-align: justify;
+    box-sizing: border-box;
+    padding: 16px;
+}
+
+@keyframes Info-Page-Open {
+    0% {
+        transform: rotate3d(0, 1, 0, 90deg);
+    }
+
+    100% {
+        transform: rotate3d(0, 1, 0, 0deg);
+    }
+}
+
+.InfoPage h2 {
+    margin-top: 0;
+}
+
+.InfoPage p + p {
+    margin-top: 24px;
+}
+
+.InfoPage ol {
+    padding-left: 1em;
+    font-size: 0.9rem;
+}
+
+.InfoPage ol li + li {
+    margin-top: 8px;
+}

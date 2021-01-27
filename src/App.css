@@ -14,6 +14,12 @@
   margin: 0 auto;
   box-sizing: border-box;
 }
+
+.App.lock-scroll {
+  overflow-y: hidden;
+  max-height: 100vh;
+}
+
 .App code {
   background: #FFF3;
   padding: 4px 8px;

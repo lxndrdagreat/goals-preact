@@ -7,6 +7,9 @@ import { GoalsIndexedDBService } from 'goals-storage-indexeddb';
 import type { GoalUpsertData } from 'goals-core';
 import { GoalOccurrence, generateTestData, GoalModel } from 'goals-core';
 import AddGoal from './AddGoal';
+import FloatingButton from './FloatingButton';
+import InfoPage from './InfoPage';
+import classNames from 'classnames';
 
 declare global {
   interface Window {
@@ -26,6 +29,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      showInfo: false,
       goals: {
         daily: [],
         weekly: [],
@@ -75,9 +79,29 @@ class App extends Component {
     })();
   }
 
+  onInfoClick(): void {
+    this.setState({
+      ...this.state,
+      showInfo: !this.state.showInfo
+    });
+  }
+
   render(): ComponentChild {
     return (
-      <div class="App">
+      <div class={
+        classNames({
+          'App': true,
+          'lock-scroll': this.state.showInfo
+        })
+      }>
+        <FloatingButton onClick={this.onInfoClick.bind(this)}>
+          { this.state.showInfo ? 'X' : 'i' }
+        </FloatingButton>
+        {
+          this.state.showInfo ? (
+            <InfoPage/>
+          ) : null
+        }
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
