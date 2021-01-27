@@ -19,8 +19,9 @@ function GoalItem({ title, occurred, rate, onTap }: GoalItemProps) {
       })}
     >
       <button type="button" onClick={onTap}>
-        {title} {(rate * 100).toFixed(0)}%
         <img src={checkeredFlag} alt="" />
+        <span class="title">{title}</span>
+        <span class="rate">{(rate * 100).toFixed(0)}%</span>
       </button>
     </li>
   );
