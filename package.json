@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "snowpack dev",
+    "start": "snowpack dev --reload",
     "build": "snowpack build",
     "test": "web-test-runner \"src/**/*.test.tsx\"",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
@@ -20,8 +20,8 @@
     "@web/test-runner": "^0.12.0",
     "chai": "^4.2.0",
     "classnames": "^2.2.6",
-    "goals-core": "^1.0.3",
-    "goals-storage-indexeddb": "^1.0.1",
+    "goals-core": "^1.0.4",
+    "goals-storage-indexeddb": "^1.0.2",
     "prettier": "^2.0.5",
     "snowpack": "^3.0.1",
     "typescript": "^4.0.3"

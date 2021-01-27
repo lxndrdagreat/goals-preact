@@ -5,10 +5,20 @@ import GoalList from './GoalList';
 import GoalContext, { GoalAppState } from './GoalContext';
 import { GoalsIndexedDBService } from 'goals-storage-indexeddb';
 import type { GoalUpsertData } from 'goals-core';
-import { GoalOccurrence } from 'goals-core';
+import { GoalOccurrence, generateTestData, GoalModel } from 'goals-core';
 import AddGoal from './AddGoal';
 
+declare global {
+  interface Window {
+    initDb: () => void;
+  }
+}
+
 const db = new GoalsIndexedDBService();
+
+window.initDb = () => {
+  generateTestData(db);
+};
 
 class App extends Component {
   state: GoalAppState;
@@ -30,13 +40,24 @@ class App extends Component {
 
   async refreshList() {
     const completes = await db.getGoalsWithCompleted();
+    const scores = await Promise.all([
+      ...completes.map(goal => db.getGoalCompletionScore(goal[0]))
+    ]);
+    const completesWithScores: [GoalModel, boolean, number][] = completes.map((pair, index) => {
+      return [
+        pair[0],
+        pair[1],
+        scores[index].rate
+      ];
+    });
+
     this.setState({
       ...this.state,
       goals: {
-        daily: completes.filter(
+        daily: completesWithScores.filter(
           (goal) => goal[0].occurs === GoalOccurrence.Daily,
         ),
-        weekly: completes.filter(
+        weekly: completesWithScores.filter(
           (goal) => goal[0].occurs === GoalOccurrence.Weekly,
         ),
       },

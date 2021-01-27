@@ -7,10 +7,11 @@ interface GoalItemProps {
   goalId: number;
   title: string;
   occurred: boolean;
+  rate: number;
   onTap: () => void;
 }
 
-function GoalItem({ goalId, title, occurred, onTap }: GoalItemProps) {
+function GoalItem({ title, occurred, rate, onTap }: GoalItemProps) {
   return (
     <li
       className={classnames('GoalItem', {
@@ -18,7 +19,7 @@ function GoalItem({ goalId, title, occurred, onTap }: GoalItemProps) {
       })}
     >
       <button type="button" onClick={onTap}>
-        {title}
+        {title} {(rate * 100).toFixed(0)}%
         <img src={checkeredFlag} alt="" />
       </button>
     </li>

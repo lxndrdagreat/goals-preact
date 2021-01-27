@@ -3,8 +3,8 @@ import type { GoalModel } from 'goals-core';
 
 export interface GoalAppState {
   goals: {
-    daily: [GoalModel, boolean][];
-    weekly: [GoalModel, boolean][];
+    daily: [GoalModel, boolean, number][];
+    weekly: [GoalModel, boolean, number][];
   };
 }
 
