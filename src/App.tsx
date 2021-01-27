@@ -41,15 +41,13 @@ class App extends Component {
   async refreshList() {
     const completes = await db.getGoalsWithCompleted();
     const scores = await Promise.all([
-      ...completes.map(goal => db.getGoalCompletionScore(goal[0]))
+      ...completes.map((goal) => db.getGoalCompletionScore(goal[0])),
     ]);
-    const completesWithScores: [GoalModel, boolean, number][] = completes.map((pair, index) => {
-      return [
-        pair[0],
-        pair[1],
-        scores[index].rate
-      ];
-    });
+    const completesWithScores: [GoalModel, boolean, number][] = completes.map(
+      (pair, index) => {
+        return [pair[0], pair[1], scores[index].rate];
+      },
+    );
 
     this.setState({
       ...this.state,
