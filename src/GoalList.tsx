@@ -18,10 +18,11 @@ function GoalList({ listType, onItemTap }: GoalListProps) {
       <h2>{listType}</h2>
       {goals[listType].length ? (
         <ul>
-          {goals[listType].map(([goal, completed]) => (
+          {goals[listType].map(([goal, completed, rate]) => (
             <GoalItem
               goalId={goal.id}
               title={goal.title}
+              rate={rate}
               occurred={completed}
               onTap={() => onItemTap(goal.id)}
             />

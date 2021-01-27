@@ -6,7 +6,6 @@
     background: transparent;
     border: none;
     display: flex;
-    justify-content: space-between;
     text-align: left;
     width: 100%;
     color: #FFFFFF;
@@ -17,10 +16,8 @@
     height: 24px;
     opacity: 0.25;
     transition: transform .2s ease-in-out;
-}
-
-.GoalItem.occurred button {
-    text-decoration: line-through;
+    display: block;
+    margin: auto 0;
 }
 
 .GoalItem.occurred button img {
@@ -39,4 +36,20 @@
     to {
         transform: scale(1.03);
     }
+}
+
+
+.GoalItem .title {
+    margin: auto 0 auto 24px;
+    display: block;
+    width: 100%;
+}
+
+.GoalItem.occurred .title {
+    text-decoration: line-through;
+}
+
+.GoalItem .rate {
+    margin: auto 0;
+    font-size: 0.85rem;
 }
